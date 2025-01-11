@@ -17,6 +17,11 @@ public class Contact {
         this.email = email;
     }
 
+    public Contact(String name, String phoneType) {
+        this.name = name;
+        this.phoneType = phoneType;
+    }
+
     public String getPhone() {
         return phone;
     }

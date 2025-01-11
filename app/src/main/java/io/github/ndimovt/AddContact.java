@@ -24,6 +24,4 @@ public class AddContact extends AppCompatActivity {
         ArrayAdapter<String> arr = new ArrayAdapter<>(this, R.layout.phonetype_dropdown_item, phones);
         listView.setAdapter(arr);
     }
-
-
 }

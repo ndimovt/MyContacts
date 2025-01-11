@@ -8,10 +8,6 @@ import java.util.TreeMap;
 public class ContactService {
     private final Map<Character, TreeMap<String, Contact>> CONTACTS = new TreeMap<>();
 
-    public Map<Character, TreeMap<String, Contact>> getCONTACTS() {
-        return CONTACTS;
-    }
-
     {
         Contact anton = new Contact("Anton", "Mobile", "0876517651", "Home", "anton@abv.bg");
         Contact boris = new Contact("Boris", "Work", "0888123456", "Work", "boris@example.com");
@@ -41,6 +37,9 @@ public class ContactService {
         CONTACTS.put('C', contactsForC);
         CONTACTS.put('D', contactsForD);
         CONTACTS.put('E', contactsForE);
+    }
+    public Map<Character, TreeMap<String, Contact>> getCONTACTS() {
+        return CONTACTS;
     }
 
     public void updateContact(Contact contact){
