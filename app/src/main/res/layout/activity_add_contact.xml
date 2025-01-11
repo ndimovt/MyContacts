@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddContact">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.MyContacts.AppBarOverlay">
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:layout_anchorGravity="center" android:id="@+id/constraintLayout"
+            app:layout_anchor="@+id/constraintLayout">
+        <Button
+                android:text="Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.931"
+                app:layout_constraintVertical_bias="0.949"/>
+        <EditText
+                android:id="@+id/name"
+                android:layout_width="329dp"
+                android:layout_height="41dp"
+                android:inputType="textCapSentences"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintVertical_bias="0.129"/>
+        <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        <CheckBox
+                android:text="Email Type"
+                android:layout_width="225dp"
+                android:layout_height="41dp" android:id="@+id/mailCheckBox"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.082" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.347"/>
+        <EditText
+                android:layout_width="286dp"
+                android:layout_height="45dp"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/editTextTextEmailAddress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.079"
+                app:layout_constraintVertical_bias="0.424"/>
+        <EditText
+                android:layout_width="339dp"
+                android:layout_height="42dp"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/editTextPhone"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.118" app:layout_constraintVertical_bias="0.273"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
