@@ -14,4 +14,10 @@
     <string name="call"/>
     <string name="top_text">Top Text</string>
     <string name="bottom_text"/>
+    <string name="title_activity_anton">ActivityAnton</string>
+    <string name="title_activity_boris">ActivityBoris</string>
+    <string name="title_activity_carla">ActivityCarla</string>
+    <string name="title_activity_david">ActivityDavid</string>
+    <string name="title_activity_elena">ActivityElena</string>
+    <string name="title_activity_elena_p">ActivityElenaP</string>
 </resources>
