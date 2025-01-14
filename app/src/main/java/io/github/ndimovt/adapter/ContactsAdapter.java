@@ -20,21 +20,25 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
         View contacts = convertView;
 
         if(contacts == null){
-            contacts = LayoutInflater.from(getContext()).inflate(R.layout.contact_info, parent,false);
+            contacts = LayoutInflater.from(getContext()).inflate(R.layout.activity_contact_info, parent,false);
         }
 
         Contact contact = getItem(position);
 
         TextView nameTextView = contacts.findViewById(R.id.contact_name);
         nameTextView.setText(contact.getName());
+
         TextView phoneTypeView = contacts.findViewById(R.id.contact_phone_type);
         phoneTypeView.setText(contact.getPhoneType());
+
         TextView phoneTextView = contacts.findViewById(R.id.contact_phone);
         phoneTextView.setText(contact.getPhone());
-        TextView phoneMailTView = contacts.findViewById(R.id.contact_email_type);
-        phoneMailTView.setText(contact.getPhone());
-        TextView phoneMailView = contacts.findViewById(R.id.contact_email);
-        phoneMailView.setText(contact.getPhone());
+
+        TextView mailTView = contacts.findViewById(R.id.contact_email_type);
+        mailTView.setText(contact.getEmailType());
+
+        TextView mailView = contacts.findViewById(R.id.contact_email);
+        mailView.setText(contact.getEmail());
 
         return contacts;
     }

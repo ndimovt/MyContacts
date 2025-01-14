@@ -7,21 +7,15 @@ import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.service.ContactService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static io.github.ndimovt.R.*;
 
-public class ContactActivity extends AppCompatActivity {
+public class ContactInfoActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.contact_info);
-
-        TextView contactNameView = findViewById(R.id.contact_name);
-        TextView contactPhoneTypeView = findViewById(id.contact_phone_type);
-        TextView contactPhoneView = findViewById(id.contact_phone);
-        TextView contactEmailTypeView = findViewById(id.contact_email_type);
-        TextView contactEmailView = findViewById(id.contact_email);
+        setContentView(layout.activity_contact_info);
 
         int contactId = getIntent().getIntExtra("id", -1);
 
@@ -33,7 +27,13 @@ public class ContactActivity extends AppCompatActivity {
             int index = contacts.indexOf(targetContact);
             Contact contact = contacts.get(index);
 
+            TextView contactNameView = findViewById(R.id.contact_name);
+            TextView contactPhoneTypeView = findViewById(id.contact_phone_type);
+            TextView contactPhoneView = findViewById(id.contact_phone);
+            TextView contactEmailTypeView = findViewById(id.contact_email_type);
+            TextView contactEmailView = findViewById(id.contact_email);
             contactNameView.setText(contact.getName());
+
             contactPhoneTypeView.setText(contact.getPhoneType());
             contactPhoneView.setText(contact.getPhone());
             contactEmailTypeView.setText(contact.getEmailType());

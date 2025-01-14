@@ -20,4 +20,5 @@
     <string name="title_activity_david">ActivityDavid</string>
     <string name="title_activity_elena">ActivityElena</string>
     <string name="title_activity_elena_p">ActivityElenaP</string>
+    <string name="title_activity_edit_contact">EditContactActivity</string>
 </resources>

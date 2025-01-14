@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" xmlns:tools="http://schemas.android.com/tools">
-<!-- Layout for a single list item -->
-<LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center_vertical"
-              android:orientation="vertical"
-              android:minHeight="?android:attr/listPreferredItemHeight"
-              android:padding="16dp" >
-    <TextView
-            android:id="@+id/contact_name"
-            android:textSize="25dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/listPreferredItemHeightLarge"
+                android:background="@drawable/border">
 
     <TextView
-            android:id="@+id/contact_phone"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    <Button
-            android:layout_marginStart="250dp"
-            android:id="@+id/call_btn"
-            android:text="Call"
-            android:layout_width="wrap_content"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
-            android:focusable="false"
+            android:id="@+id/contact_phone"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="17dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="222dp"/>
+    <TextView
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="225dp"
+            android:layout_above="@+id/contact_phone"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"/>
+
+    <TextView
+
+            android:layout_width="46dp"
+            android:layout_height="35dp"
+            android:id="@+id/letter"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="26dp"
+            android:layout_toStartOf="@+id/contact_name"
+            android:layout_marginEnd="21dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
     />
-</LinearLayout>
+    <Button
+        android:layout_marginStart="300dp"
+        android:id="@+id/call_btn"
+        android:text="Call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>
