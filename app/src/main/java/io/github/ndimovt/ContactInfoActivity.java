@@ -1,43 +1,53 @@
 package io.github.ndimovt;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import io.github.ndimovt.model.Contact;
-import io.github.ndimovt.service.ContactService;
-
-import java.util.ArrayList;
 
 import static io.github.ndimovt.R.*;
 
 public class ContactInfoActivity extends AppCompatActivity {
+    TextView contactNameView;
+    TextView contactPhoneTypeView;
+    TextView contactPhoneView;
+    TextView contactEmailTypeView;
+    TextView contactEmailView;
+
+    Button openEditActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_contact_info);
 
-        int contactId = getIntent().getIntExtra("id", -1);
+        contactNameView = findViewById(R.id.contact_name);
+        contactPhoneTypeView = findViewById(id.contact_phone_type);
+        contactPhoneView = findViewById(id.contact_phone);
+        contactEmailTypeView = findViewById(id.contact_email_type);
+        contactEmailView = findViewById(id.contact_email);
 
-        ContactService contactService = new ContactService();
-        ArrayList<Contact> contacts = new ArrayList<>(contactService.getContacts());
+        Intent intent = getIntent();
 
-        Contact targetContact = new Contact(contactId);
-        if (contacts.contains(targetContact)) {
-            int index = contacts.indexOf(targetContact);
-            Contact contact = contacts.get(index);
+        contactNameView.setText(intent.getStringExtra("name"));
+        contactPhoneTypeView.setText(intent.getStringExtra("phoneType"));
+        contactPhoneView.setText(intent.getStringExtra("phone"));
+        contactEmailTypeView.setText(intent.getStringExtra("emailType"));
+        contactEmailView.setText(intent.getStringExtra("email"));
 
-            TextView contactNameView = findViewById(R.id.contact_name);
-            TextView contactPhoneTypeView = findViewById(id.contact_phone_type);
-            TextView contactPhoneView = findViewById(id.contact_phone);
-            TextView contactEmailTypeView = findViewById(id.contact_email_type);
-            TextView contactEmailView = findViewById(id.contact_email);
-            contactNameView.setText(contact.getName());
+        openEditActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, EditContactActivity.class);
+                startActivity(intent);
+            }
+        });
 
-            contactPhoneTypeView.setText(contact.getPhoneType());
-            contactPhoneView.setText(contact.getPhone());
-            contactEmailTypeView.setText(contact.getEmailType());
-            contactEmailView.setText(contact.getEmail());
+
         }
     }
-}
+

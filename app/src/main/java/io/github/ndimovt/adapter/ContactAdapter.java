@@ -2,6 +2,7 @@ package io.github.ndimovt.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         Context context = view.getContext();
         Intent intent = new Intent(context, ContactInfoActivity.class);
         intent.putExtra("id",contacts.get(index).getId());
+        intent.putExtra("name", contacts.get(index).getName());
+        intent.putExtra("phoneType", contacts.get(index).getPhoneType());
+        intent.putExtra("phone", contacts.get(index).getPhone());
+        intent.putExtra("emailType", contacts.get(index).getEmailType());
+        intent.putExtra("email", contacts.get(index).getEmail());
         context.startActivity(intent);
     }
 }
