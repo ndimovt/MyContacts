@@ -1,9 +1,5 @@
 package io.github.ndimovt;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +9,6 @@ import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.service.ContactService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ContactsListActivity extends AppCompatActivity {
     private final ContactService service = new ContactService();

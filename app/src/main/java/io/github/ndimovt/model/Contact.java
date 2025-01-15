@@ -19,6 +19,30 @@ public class Contact{
         this.email = email;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneType(String phoneType) {
+        this.phoneType = phoneType;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmailType(String emailType) {
+        this.emailType = emailType;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Contact(int id) {
         this.id = id;
     }
@@ -45,6 +69,14 @@ public class Contact{
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
+        Contact contact = (Contact) o;
+        return id == contact.id;
     }
 
     @Override

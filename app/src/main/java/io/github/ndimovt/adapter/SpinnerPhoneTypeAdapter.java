@@ -5,7 +5,7 @@ import android.widget.AdapterView;
 
 public class SpinnerPhoneTypeAdapter implements AdapterView.OnItemSelectedListener {
     String selectedType;
-    String[] phoneTypes = {"Mobile", "Fax", "Home"};
+    String[] phoneTypes = {"Mobile", "Fax", "Home", "Work"};
 
     public String[] getPhoneTypes() {
         return phoneTypes;
