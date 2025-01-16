@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.ndimovt.ContactInfoActivity;
@@ -17,7 +18,6 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     private static List<Contact> list;
     private Context context;
-    private int index;
     public ContactAdapter(List<Contact> list, Context context) {
         this.list = list;
         this.context = context;
@@ -69,12 +69,24 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
         }
         holder.name.setText(list.get(position).getName());
         holder.phone.setText(list.get(position).getPhone());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value = list.get(position).getPhone();
+                if(!value.equals("") && !value.equals(" ")){
+                    Toast.makeText(context.getApplicationContext(), "Calling "+value, Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(context.getApplicationContext(), "Missing phone number ", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, ContactInfoActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("contact", contact.getId());
             context.startActivity(intent);
         });
+
     }
 
     @Override

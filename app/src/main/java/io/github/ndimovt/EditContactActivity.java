@@ -21,6 +21,7 @@ public class EditContactActivity extends AppCompatActivity{
     Spinner emailTypeView;
     EditText emailView;
     Button saveRecord;
+    ImageView imageView;
     private final SpinnerPhoneTypeAdapter phoneTypeAdapter = new SpinnerPhoneTypeAdapter();
     private final SpinnerEmailTypeAdapter emailTypeAdapter = new SpinnerEmailTypeAdapter();
     private ContactAdapter adapter;
@@ -31,7 +32,6 @@ public class EditContactActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
-
         String[] pTypes = phoneTypeAdapter.getPhoneTypes();
         String[] eTypes = emailTypeAdapter.getEmailTypes();
 
@@ -40,6 +40,7 @@ public class EditContactActivity extends AppCompatActivity{
         phoneView = findViewById(R.id.editTextPhone);
         emailTypeView = findViewById(R.id.emailTypeSpinner);
         emailView = findViewById(R.id.editEmailAddress);
+        imageView = findViewById(R.id.imageView);
 
         saveRecord = findViewById(R.id.save_button);
 

@@ -54,8 +54,6 @@ public class ContactInfoActivity extends AppCompatActivity {
                 break;
             }
         }
-        Log.d("asdas", "asd"+contact.getName());
-
         assert contact != null;
         contactNameView.setText(contact.getName());
         contactPhoneTypeView.setText(contact.getPhoneType());
