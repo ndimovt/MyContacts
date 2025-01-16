@@ -1,6 +1,5 @@
 package io.github.ndimovt;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,16 +17,15 @@ public class ContactInfoActivity extends AppCompatActivity {
     TextView contactPhoneView;
     TextView contactEmailTypeView;
     TextView contactEmailView;
-
     Button openEditActivity;
+    private List<Contact> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ContactService cs = new ContactService();
-        List<Contact> con = cs.getContacts();
-        Contact contact = null;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
+
+        list = ContactService.getContacts();
 
         contactNameView = findViewById(R.id.contact_name);
         contactPhoneTypeView = findViewById(R.id.contact_phone_type);
@@ -37,33 +35,31 @@ public class ContactInfoActivity extends AppCompatActivity {
         openEditActivity = findViewById(R.id.edit);
 
         Intent intent = getIntent();
-        int index = intent.getIntExtra("id", -1);
-
-        for(Contact c : con){
-            if(c.getId() == index){
+        int id = intent.getIntExtra("contact", -1);
+        Contact contact = null;
+        for(Contact c : list){
+            if(c.getId() == id){
                 contact = c;
-                break;
             }
         }
-        if(contact != null){
-            contactNameView.setText(contact.getName());
-            contactPhoneTypeView.setText(contact.getPhoneType());
-            contactPhoneView.setText(contact.getPhone());
-            contactEmailTypeView.setText(contact.getEmailType());
-            contactEmailView.setText(contact.getPhone());
-        }
+
+        contactNameView.setText(contact.getName());
+        contactPhoneTypeView.setText(contact.getPhoneType());
+        contactPhoneView.setText(contact.getPhone());
+        contactEmailTypeView.setText(contact.getEmailType());
+        contactEmailView.setText(contact.getPhone());
 
         Contact finalContact = contact;
         openEditActivity.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, EditContactActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EditContactActivity.class);
                 intent.putExtra("id", finalContact.getId());
                 startActivity(intent);
                 finish();
             }
         });
-        }
     }
+}
 

@@ -1,12 +1,8 @@
 package io.github.ndimovt;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.adapter.ContactAdapter;
@@ -17,94 +13,88 @@ import io.github.ndimovt.service.ContactService;
 
 import java.util.ArrayList;
 
-public class EditContactActivity extends AppCompatActivity {
-    EditText contactNameView;
-    Spinner contactPhoneTypeView;
-    EditText contactPhoneView;
-    Spinner contactEmailTypeView;
-    EditText contactEmailView;
+public class EditContactActivity extends AppCompatActivity{
+    EditText nameView;
+    Spinner phoneTypeView;
+    EditText phoneView;
+    Spinner emailTypeView;
+    EditText emailView;
     Button saveRecord;
     private final SpinnerPhoneTypeAdapter phoneTypeAdapter = new SpinnerPhoneTypeAdapter();
     private final SpinnerEmailTypeAdapter emailTypeAdapter = new SpinnerEmailTypeAdapter();
+    private ContactAdapter adapter;
+    private ArrayList<Contact> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ContactService service = new ContactService();
-        ArrayList<Contact> list = (ArrayList<Contact>) service.getContacts();
-        Contact contact = null;
-        String[] pTypes = phoneTypeAdapter.getPhoneTypes();
-        String[] eTypes = emailTypeAdapter.getEmailTypes();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-        contactNameView = findViewById(R.id.editName);
-        contactPhoneTypeView = findViewById(R.id.phoneTypeSpinner);
-        contactPhoneView = findViewById(R.id.editTextPhone);
-        contactEmailTypeView = findViewById(R.id.emailTypeSpinner);
-        contactEmailView = findViewById(R.id.editEmailAddress);
-        saveRecord = findViewById(R.id.save_button);
+        list = (ArrayList<Contact>) ContactService.getContacts();
+        String[] pTypes = phoneTypeAdapter.getPhoneTypes();
+        String[] eTypes = emailTypeAdapter.getEmailTypes();
+
+        nameView = findViewById(R.id.editName);
+        phoneTypeView = findViewById(R.id.phoneTypeSpinner);
+        phoneView = findViewById(R.id.editTextPhone);
+        emailTypeView = findViewById(R.id.emailTypeSpinner);
+        emailView = findViewById(R.id.editEmailAddress);
 
         Intent intent = getIntent();
-        int index = intent.getIntExtra("id", -1);
-
+        int id = intent.getIntExtra("id", -1);
+        Contact contact = null;
         for(Contact c : list){
-            if(c.getId() == index){
+            if(c.getId() == id){
                 contact = c;
-                break;
             }
         }
-        if(contact != null){
-            contactNameView.setText(contact.getName());
+        Log.d("Text", "Name"+contact.getPhone());
 
-            contactNameView.requestFocus();
-            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.showSoftInput(contactNameView, InputMethodManager.SHOW_IMPLICIT);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-            contactPhoneView.setText(contact.getPhone());
-            contactEmailView.setText(contact.getEmail());
 
-            ArrayAdapter<String> phoneType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, pTypes);
-            phoneType.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-            contactPhoneTypeView.setAdapter(phoneType);
 
-            ArrayAdapter<String> emailType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, eTypes);
-            emailType.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-            contactEmailTypeView.setAdapter(emailType);
+//        Bundle extras = getIntent().getBundleExtra("key");
+//        Contact contact = null;
+//        if (extras != null) {
+//            contact = new Contact(
+//                    extras.getInt("id"),
+//                    extras.getString("name"),
+//                    extras.getString("phoneType"),
+//                    extras.getString("phone"),
+//                    extras.getString("emailType"),
+//                    extras.getString("email")
+//            );
+//        }
 
-            String typePhone = contact.getPhoneType();
-            if(typePhone != null){
-                int position = findPosition(pTypes, typePhone);
-                contactPhoneTypeView.setSelection(position);
-            }
+//        if (contact != null) {
+//            nameView.setText(contact.getName());
+//            phoneView.setText(contact.getPhone());
+//            emailView.setText(contact.getEmail());
+//
+//            ArrayAdapter<String> phoneType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, pTypes);
+//            phoneType.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+//            phoneTypeView.setAdapter(phoneType);
+//
+//            ArrayAdapter<String> emailType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, eTypes);
+//            emailType.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+//            emailTypeView.setAdapter(emailType);
+//
+//            String typePhone = contact.getPhoneType();
+////            if (typePhone != null) {
+////                int position = findPosition(pTypes, typePhone);
+////                phoneTypeView.setSelection(position);
+////            }
+////
+////            String typeMail = contact.getEmailType();
+////            if (typeMail != null) {
+////                int position = findPosition(eTypes, typeMail);
+////                emailTypeView.setSelection(position);
+////            }
+//        }
+//        Contact finalContact = contact;
 
-            String typeMail = contact.getEmailType();
-            if(typeMail != null){
-                int position = findPosition(eTypes, typeMail);
-                contactEmailTypeView.setSelection(position);
-            }
-        }
-
-        Contact finalContact = contact;
-        saveRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finalContact.setName(contactNameView.getText().toString());
-                finalContact.setEmailType(contactEmailTypeView.getSelectedItem().toString());
-                finalContact.setEmail(contactEmailView.getText().toString());
-                finalContact.setPhoneType(contactPhoneTypeView.getSelectedItem().toString());
-                finalContact.setPhone(contactPhoneView.getText().toString());
-                service.updateContact(finalContact);
-                finish();
-            }
-        });
-    }
-    private int findPosition(String[] arr, String element){
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i].equals(element)){
-                return i;
-            }
-        }
-        return 0;
     }
 }
+
