@@ -76,7 +76,7 @@ public class Contact{
         if (this == o) return true;
         if (!(o instanceof Contact)) return false;
         Contact contact = (Contact) o;
-        return id == contact.id;
+        return Objects.equals(name, contact.name) && Objects.equals(phoneType, contact.phoneType) && Objects.equals(phone, contact.phone) && Objects.equals(emailType, contact.emailType) && Objects.equals(email, contact.email);
     }
 
     @Override

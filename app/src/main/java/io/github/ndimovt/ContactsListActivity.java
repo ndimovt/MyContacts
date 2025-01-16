@@ -1,7 +1,6 @@
 package io.github.ndimovt;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +23,7 @@ public class ContactsListActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_list);
         contacts = (ArrayList<Contact>) ContactService.getContacts();
+
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new ContactAdapter(contacts, getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -34,14 +34,6 @@ public class ContactsListActivity extends AppCompatActivity{
             @Override
             public void onChanged() {
                 super.onChanged();
-            }
-        });
-        findViewById(R.id.addContactButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int index = 5;
-                Contact s = new Contact(5,"koiokl", "podas", "1354f", "ada", "adsa");
-                adapter.updateContact(index, s);
             }
         });
     }

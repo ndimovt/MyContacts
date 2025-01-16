@@ -2,6 +2,7 @@ package io.github.ndimovt.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
-    List<Contact> list;
+    private static List<Contact> list;
     private Context context;
+    private int index;
     public ContactAdapter(List<Contact> list, Context context) {
         this.list = list;
         this.context = context;
@@ -23,6 +25,18 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
 
     public ContactAdapter(List<Contact> list) {
         this.list = list;
+    }
+
+    public ContactAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setList(List<Contact> list) {
+        this.list = list;
+    }
+
+    public static List<Contact> getList() {
+        return list;
     }
 
     @NonNull
@@ -36,7 +50,7 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NotNull final DataViewHolder holder, final int position) {
+    public void onBindViewHolder(@NotNull final DataViewHolder holder, int position) {
         Contact contact = list.get(position);
         if(position > 0){
             Contact prevContact = list.get(position - 1);
@@ -65,15 +79,8 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     public int getItemCount() {
         return list.size();
     }
-    public void updateContact(int index, Contact c){
-        Contact contact = list.get(index);
-        contact.setName(c.getName());
-        contact.setPhone(c.getPhone());
-        contact.setEmailType(c.getEmailType());
-        contact.setPhoneType(c.getPhone());
-        notifyItemChanged(index);
-    }
-    public void addContact(int index, Contact contact){
-
+    public void updateContact(int i,Contact c){
+        list.set(i, c);
+        notifyItemChanged(i);
     }
 }
