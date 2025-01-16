@@ -32,8 +32,10 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     }
 
     public void setList(List<Contact> list) {
+
         this.list = list;
     }
+
 
     public static List<Contact> getList() {
         return list;

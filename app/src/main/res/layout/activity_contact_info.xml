@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-
 >
     <LinearLayout
             android:id="@+id/contact"
             android:orientation="vertical"
             android:padding="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" android:layout_marginBottom="145dp" android:layout_marginTop="59dp"
-            android:layout_alignParentTop="true">
-        <TextView
-                android:id="@+id/contact_name"
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:background="@color/purple_200"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="65sp"
-                android:layout_gravity="center"
-        />
+            android:layout_height="427dp"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="-95dp">
         <Button
+                android:id="@+id/call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Call"
         />
         <Button
+                android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Message"
         />
         <Button
+                android:id="@+id/mail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -59,12 +51,26 @@
                 android:id="@+id/contact_email"
                 android:layout_width="match_parent"
                 android:textSize="20sp"
-                android:layout_height="wrap_content"/> <Button
-            android:text="Edit"
-            android:layout_width="346dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit" android:layout_alignParentBottom="true" android:layout_marginBottom="57dp"
-            android:layout_marginTop="626dp" android:layout_alignParentTop="true"/>
+                android:layout_height="wrap_content"/>
+        <Button
+                android:text="Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit"/>
     </LinearLayout>
-
+    <ImageView
+            android:src="@drawable/image"
+            android:layout_width="wrap_content"
+            android:layout_height="275dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/imageView2"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="86dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="84dp" android:layout_marginTop="11dp" android:layout_alignParentTop="true"
+            android:layout_above="@+id/contact" android:layout_marginBottom="113dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="258dp"
+            android:layout_height="50dp" android:id="@+id/contact_name" android:layout_above="@+id/contact"
+            android:layout_marginBottom="38dp" android:layout_marginEnd="93dp" android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" android:layout_marginStart="60dp" android:layout_marginTop="311dp"
+            android:layout_alignParentTop="true"/>
 </RelativeLayout>
