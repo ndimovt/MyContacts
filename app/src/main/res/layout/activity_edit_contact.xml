@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EditContactActivity">
+        tools:context=".activity.EditContactActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -88,11 +88,11 @@
                         android:id="@+id/imageView"
                         android:layout_width="253dp"
                         android:layout_height="241dp"
-                        app:layout_constraintBottom_toTopOf="@+id/editName"
+                        android:src="@drawable/image"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        tools:srcCompat="@drawable/image"
+                        app:layout_constraintBottom_toTopOf="@+id/editName"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

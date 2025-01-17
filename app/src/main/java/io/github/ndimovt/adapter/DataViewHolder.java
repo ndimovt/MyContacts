@@ -8,12 +8,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.github.ndimovt.R;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The class DataViewHolder
+ */
+
 public class DataViewHolder extends RecyclerView.ViewHolder {
     TextView letter;
     TextView name;
     TextView phone;
     Button button;
     View view;
+
+    /**
+     * Instantiates DataViewHolder.
+     * @param itemView View object
+     */
 
     public DataViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);

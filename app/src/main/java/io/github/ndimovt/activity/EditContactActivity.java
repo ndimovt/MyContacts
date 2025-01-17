@@ -1,33 +1,42 @@
-package io.github.ndimovt;
+package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import io.github.ndimovt.R;
 import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.adapter.SpinnerEmailTypeAdapter;
 import io.github.ndimovt.adapter.SpinnerPhoneTypeAdapter;
 import io.github.ndimovt.model.Contact;
-import io.github.ndimovt.service.ContactService;
 
 import java.util.ArrayList;
 
+/**
+ * The class EditContactActivity.
+ * Creates activity for changing selected contact info.
+ */
 public class EditContactActivity extends AppCompatActivity{
-    EditText nameView;
-    Spinner phoneTypeView;
-    EditText phoneView;
-    Spinner emailTypeView;
-    EditText emailView;
-    Button saveRecord;
-    ImageView imageView;
+    private EditText nameView;
+    private Spinner phoneTypeView;
+    private EditText phoneView;
+    private Spinner emailTypeView;
+    private EditText emailView;
+    private Button saveRecord;
+    private ImageView imageView;
     private final SpinnerPhoneTypeAdapter phoneTypeAdapter = new SpinnerPhoneTypeAdapter();
     private final SpinnerEmailTypeAdapter emailTypeAdapter = new SpinnerEmailTypeAdapter();
     private ContactAdapter adapter;
     private ArrayList<Contact> list = (ArrayList<Contact>) ContactAdapter.getList();
     private Contact contact;
 
+    /**
+     * Populates activity with info fetched by List with contacts with a given id.
+     * Also gives possibility to update and save info.
+     * Creates layout using activity_edit_contact.
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +44,7 @@ public class EditContactActivity extends AppCompatActivity{
         String[] pTypes = phoneTypeAdapter.getPhoneTypes();
         String[] eTypes = emailTypeAdapter.getEmailTypes();
 
-        nameView = findViewById(R.id.editName);
-        phoneTypeView = findViewById(R.id.phoneTypeSpinner);
-        phoneView = findViewById(R.id.editTextPhone);
-        emailTypeView = findViewById(R.id.emailTypeSpinner);
-        emailView = findViewById(R.id.editEmailAddress);
-        imageView = findViewById(R.id.imageView);
-
-        saveRecord = findViewById(R.id.save_button);
+        initializeDesign();
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
@@ -59,13 +61,9 @@ public class EditContactActivity extends AppCompatActivity{
             phoneView.setText(contact.getPhone());
             emailView.setText(contact.getEmail());
 
-            ArrayAdapter<String> phoneType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, pTypes);
-            phoneType.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-            phoneTypeView.setAdapter(phoneType);
+            phoneTypeView.setAdapter(spinnerValue(pTypes));
 
-            ArrayAdapter<String> emailType = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, eTypes);
-            emailType.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-            emailTypeView.setAdapter(emailType);
+            emailTypeView.setAdapter(spinnerValue(eTypes));
 
             String typePhone = contact.getPhoneType();
             if (typePhone != null) {
@@ -79,7 +77,6 @@ public class EditContactActivity extends AppCompatActivity{
                 emailTypeView.setSelection(position);
             }
         }
-
 
         Contact finalContact = contact;
         saveRecord.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +100,6 @@ public class EditContactActivity extends AppCompatActivity{
                 finish();
             }
         });
-
     }
 
     private int findPosition(String[] arr, String infoType) {
@@ -113,6 +109,20 @@ public class EditContactActivity extends AppCompatActivity{
             }
         }
         return -1;
+    }
+    private ArrayAdapter<String> spinnerValue(String[] arr){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arr);
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        return adapter;
+    }
+    private void initializeDesign(){
+        nameView = findViewById(R.id.editName);
+        phoneTypeView = findViewById(R.id.phoneTypeSpinner);
+        phoneView = findViewById(R.id.editTextPhone);
+        emailTypeView = findViewById(R.id.emailTypeSpinner);
+        emailView = findViewById(R.id.editEmailAddress);
+        imageView = findViewById(R.id.imageView);
+        saveRecord = findViewById(R.id.save_button);
     }
 
 }
