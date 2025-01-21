@@ -1,16 +1,12 @@
 package io.github.ndimovt.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import io.github.ndimovt.myListener.IListener;
-import io.github.ndimovt.activity.ContactInfoActivity;
 import io.github.ndimovt.R;
-import io.github.ndimovt.buttons.CallButton;
 import io.github.ndimovt.model.Contact;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,18 +18,7 @@ import java.util.List;
  */
 public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     private static List<Contact> list;
-    private Context context;
-    private IListener listener;
-
-    /**
-     * Instantiates ContactAdapter.
-     * @param list List object
-     * @param context Context object
-     */
-    public ContactAdapter(List<Contact> list, Context context) {
-        this.list = list;
-        this.context = context;
-    }
+    private IClick listener;
 
     /**
      * Instantiates ContactAdapter.
@@ -76,7 +61,7 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NotNull final DataViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull DataViewHolder holder, int position) {
         Contact contact = list.get(position);
         if(position > 0){
             Contact prevContact = list.get(position - 1);
@@ -93,13 +78,10 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
         }
         holder.name.setText(list.get(position).getName());
         holder.phone.setText(list.get(position).getPhone());
-        holder.button.setOnClickListener(listener = new CallButton(list.get(position).getPhone(), context.getApplicationContext()));
+        holder.button.setOnClickListener(v -> listener.buttonClick(position));
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, ContactInfoActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("contact", contact.getId());
-            context.startActivity(intent);
+            listener.contactClick(position, contact);
         });
     }
 
@@ -120,5 +102,12 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     public void updateContact(int i,Contact c){
         list.set(i, c);
         notifyItemChanged(i);
+    }
+    public void setListener(IClick listener) {
+        this.listener = listener;
+    }
+    public interface IClick{
+        void buttonClick(int position);
+        void contactClick(int position, Contact contact);
     }
 }
