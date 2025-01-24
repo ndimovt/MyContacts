@@ -1,11 +1,12 @@
 package io.github.ndimovt.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * The class Contact
  */
-public class Contact{
+public class Contact implements Serializable {
     private int id;
     private String name;
     private String phoneType;

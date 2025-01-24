@@ -2,16 +2,20 @@ package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.R;
 import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.buttons.CallButton;
 import io.github.ndimovt.buttons.MessageButton;
 import io.github.ndimovt.buttons.SendMailButton;
+import io.github.ndimovt.data.DataList;
 import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.myListener.IListener;
 
@@ -23,6 +27,7 @@ import java.util.List;
  */
 
 public class ContactInfoActivity extends AppCompatActivity {
+    private ActivityResultLauncher<Intent> launcher;
     private TextView contactNameView;
     private TextView contactPhoneTypeView;
     private  TextView contactPhoneView;
@@ -32,9 +37,10 @@ public class ContactInfoActivity extends AppCompatActivity {
     private Button call;
     private Button message;
     private Button mail;
+    private Button exit;
     private ImageView image;
     private IListener listener;
-    private List<Contact> list = ContactAdapter.getList();
+    private List<Contact> list = DataList.getInstance().getContacts();
 
     /**
      * Creates screen and populates all fields with values.
@@ -50,7 +56,7 @@ public class ContactInfoActivity extends AppCompatActivity {
         initializeDesign();
 
         Bundle intent = getIntent().getExtras();
-        int id = intent.getInt("contact");
+        int id = intent.getInt("id");
         Contact contact = null;
         for(Contact c : list){
             if(c.getId() == id){
@@ -71,17 +77,37 @@ public class ContactInfoActivity extends AppCompatActivity {
         message.setOnClickListener(listener = new MessageButton(contact.getPhone(), this));
 
         call.setOnClickListener(listener = new CallButton(contact.getPhone(), this));
+
         openEditActivity.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), EditContactActivity.class);
+                Intent intent = new Intent(ContactInfoActivity.this, EditContactActivity.class);
                 intent.putExtra("id", finalContact.getId());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                launcher.launch(intent);;
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 finish();
             }
         });
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Log.d("ueu", "testing "+result.getResultCode());
+                    Log.d("ueu", "testing "+RESULT_OK);
+
+                    if (result.getResultCode() == RESULT_OK) {
+                        Log.d("ueu", "testing21312 ");
+                        Intent data = result.getData();
+                        int ids = data.getIntExtra("id", -1);
+                        Log.d("id", "id "+ids);
+                        setResult(RESULT_OK, data);
+                    }
+                }
+        );
     }
     private void initializeDesign(){
         contactNameView = findViewById(R.id.contact_name);
@@ -90,6 +116,7 @@ public class ContactInfoActivity extends AppCompatActivity {
         contactEmailTypeView = findViewById(R.id.contact_email_type);
         contactEmailView = findViewById(R.id.contact_email);
         openEditActivity = findViewById(R.id.edit);
+        exit = findViewById(R.id.button);
         image = findViewById(R.id.imageView2);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
