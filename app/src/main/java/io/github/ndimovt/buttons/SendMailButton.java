@@ -1,6 +1,9 @@
 package io.github.ndimovt.buttons;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import io.github.ndimovt.myListener.IListener;
@@ -28,15 +31,18 @@ public class SendMailButton implements IListener {
      */
     @Override
     public void onClick(View view) {
-        try{
-            String value = this.email;
-            if(value != null){
-                Toast.makeText(this.context, "Sending email to "+value, Toast.LENGTH_LONG).show();
-            }else {
-                Toast.makeText(this.context, "Missing email ", Toast.LENGTH_LONG).show();
-            }
-        }catch (NullPointerException npe){
-            npe.printStackTrace();
-        }
+//        if (email != null && !email.isEmpty()) {
+//            Log.d("mail", "mails "+email);
+//            try {
+//                Intent intent = new Intent(Intent.ACTION_SENDTO);
+//                intent.putExtra(Intent.EXTRA_EMAIL, email);
+//                intent.setType("message/rfc822");
+//                context.startActivity(intent);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }else{
+//            Toast.makeText(context, "Phone number is missing or invalid", Toast.LENGTH_SHORT).show();
+//        }
     }
 }

@@ -1,6 +1,8 @@
 package io.github.ndimovt.buttons;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 import io.github.ndimovt.myListener.IListener;
@@ -28,15 +30,16 @@ public class CallButton implements IListener {
      */
     @Override
     public void onClick(View view) {
-        try{
-            String value = this.phoneNumber;
-            if(value != null){
-                Toast.makeText(this.context, "Calling "+value, Toast.LENGTH_LONG).show();
-            }else {
-                Toast.makeText(this.context, "Missing phone number ", Toast.LENGTH_LONG).show();
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            try {
+                Uri uri = Uri.parse("tel:" + phoneNumber);
+                Intent call = new Intent(Intent.ACTION_DIAL, uri);
+                context.startActivity(call);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (NullPointerException npe){
-            npe.printStackTrace();
+        }else{
+            Toast.makeText(context, "Phone number is missing or invalid", Toast.LENGTH_SHORT).show();
         }
     }
 }

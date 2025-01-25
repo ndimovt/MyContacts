@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,9 +75,24 @@ public class ContactInfoActivity extends AppCompatActivity {
         contactEmailView.setText(contact.getEmail());
 
         Contact finalContact = contact;
-        mail.setOnClickListener(listener = new SendMailButton(contact.getEmail(), this));
+        Log.d("email", "email "+contact.getEmail());
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mailIntent = new Intent(ContactInfoActivity.this, SendEmailActivity.class);
+                mailIntent.putExtra("reciever", finalContact.getEmail());
+                startActivity(mailIntent);
+            }
+        });
 
-        message.setOnClickListener(listener = new MessageButton(contact.getPhone(), this));
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent phone = new Intent(ContactInfoActivity.this, SendSmsActivity.class);
+                phone.putExtra("phone", finalContact.getPhone());
+                startActivity(phone);
+            }
+        });
 
         call.setOnClickListener(listener = new CallButton(contact.getPhone(), this));
         openEditActivity.setOnClickListener(new View.OnClickListener() {

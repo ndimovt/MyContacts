@@ -25,9 +25,6 @@ public class Validator {
         return matcher.matches();
     }
     public static boolean emailValidator(String email){
-        if(email == null || email.isEmpty()){
-            return false;
-        }
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

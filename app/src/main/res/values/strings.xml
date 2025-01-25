@@ -21,4 +21,6 @@
     <string name="title_activity_elena">ActivityElena</string>
     <string name="title_activity_elena_p">ActivityElenaP</string>
     <string name="title_activity_edit_contact">EditContactActivity</string>
+    <string name="title_activity_send_email">SendEmailActivity</string>
+    <string name="title_activity_send_sms">SendSmsActivity</string>
 </resources>

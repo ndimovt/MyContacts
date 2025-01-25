@@ -95,20 +95,23 @@ public class ContactsListActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     Intent data = result.getData();
-                    int id = data.getIntExtra("id", -1);
-                    int index = getIndex(contacts, id);
+                    if(data != null){
+                        int id = data.getIntExtra("id", -1);
+                        int index = getIndex(contacts, id);
 
-                    switch (result.getResultCode()){
-                        case RESULT_OK:
-                            adapter.notifyItemChanged(index);
-                            break;
-                        case RESULT_DELETE:
-                            contacts.remove(index);
-                            adapter.notifyItemRemoved(index);
-                            break;
-                        default:
-                            break;
+                        switch (result.getResultCode()){
+                            case RESULT_OK:
+                                adapter.notifyItemChanged(index);
+                                break;
+                            case RESULT_DELETE:
+                                contacts.remove(index);
+                                adapter.notifyItemRemoved(index);
+                                break;
+                            default:
+                                break;
+                        }
                     }
+
                 }
         );
         return launcher;
