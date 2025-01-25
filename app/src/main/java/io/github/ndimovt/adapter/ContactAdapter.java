@@ -29,14 +29,6 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     }
 
     /**
-     * Returns List object.
-     * @return List object
-     */
-    public static List<Contact> getList() {
-        return list;
-    }
-
-    /**
      * Creates layout from list_contact.xml
      * @param parent The ViewGroup into which the new View will be added after it is bound to
      *               an adapter position.

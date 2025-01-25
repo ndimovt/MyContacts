@@ -2,7 +2,6 @@ package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -52,14 +51,6 @@ public class AddContactActivity extends AppCompatActivity {
             }
         });
 
-    }
-    private int findPosition(String[] arr, String infoType) {
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i].equals(infoType)){
-                return i;
-            }
-        }
-        return -1;
     }
     private ArrayAdapter<String> spinnerValue(String[] arr){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arr);

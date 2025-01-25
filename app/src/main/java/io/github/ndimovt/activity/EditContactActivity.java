@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.R;
-import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.adapter.SpinnerEmailTypeAdapter;
 import io.github.ndimovt.adapter.SpinnerPhoneTypeAdapter;
 import io.github.ndimovt.data.DataList;
