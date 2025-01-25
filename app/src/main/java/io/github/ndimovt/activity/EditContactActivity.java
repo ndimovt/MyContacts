@@ -2,15 +2,14 @@ package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.R;
 import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.adapter.SpinnerEmailTypeAdapter;
 import io.github.ndimovt.adapter.SpinnerPhoneTypeAdapter;
+import io.github.ndimovt.data.DataList;
 import io.github.ndimovt.model.Contact;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class EditContactActivity extends AppCompatActivity{
     private ImageView imageView;
     private final SpinnerPhoneTypeAdapter phoneTypeAdapter = new SpinnerPhoneTypeAdapter();
     private final SpinnerEmailTypeAdapter emailTypeAdapter = new SpinnerEmailTypeAdapter();
-    private ArrayList<Contact> list = (ArrayList<Contact>) ContactAdapter.getList();
+    private ArrayList<Contact> list = (ArrayList<Contact>) DataList.getInstance().getContacts();
     private Contact contact;
 
     /**
@@ -98,7 +97,6 @@ public class EditContactActivity extends AppCompatActivity{
 
                 Intent resultIntent = new Intent(EditContactActivity.this, ContactsListActivity.class);
                 resultIntent.putExtra("id", finalContact.getId());
-                resultIntent.putExtra("name", finalContact.getName());
                 resultIntent.putExtra("name", finalContact.getName());
                 setResult(RESULT_OK, resultIntent);
                 finish();

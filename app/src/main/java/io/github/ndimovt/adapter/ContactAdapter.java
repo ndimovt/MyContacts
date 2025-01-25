@@ -93,16 +93,6 @@ public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
     public int getItemCount() {
         return list.size();
     }
-
-    /**
-     * Updates Contact object at a given position in the List and notifies the adapter.
-     * @param i Int primitive
-     * @param c Contact object
-     */
-    public void updateContact(int i,Contact c){
-        list.set(i, c);
-        notifyItemChanged(i);
-    }
     public void setListener(IClick listener) {
         this.listener = listener;
     }

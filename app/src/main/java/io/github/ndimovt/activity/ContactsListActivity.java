@@ -16,12 +16,14 @@ import io.github.ndimovt.R;
 import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.adapter.DataViewHolder;
 import io.github.ndimovt.buttons.CallButton;
+import io.github.ndimovt.comparator.ContactComparator;
 import io.github.ndimovt.data.DataList;
 import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.myListener.IListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +32,8 @@ import java.util.List;
  */
 
 public class ContactsListActivity extends AppCompatActivity {
+    private static final int RESULT_DELETE = 5;
+    private ContactComparator comparator;
     private ActivityResultLauncher<Intent> contactInfoLauncher;
     private ActivityResultLauncher<Intent> insertContactLauncher;
     private List<Contact> contacts = DataList.getInstance().getContacts();
@@ -74,40 +78,9 @@ public class ContactsListActivity extends AppCompatActivity {
                 intent.putExtra("id", contact.getId());
                 contactInfoLauncher.launch(intent);
             }
-
         });
-        contactInfoLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        int id = data.getIntExtra("id", -1);
-                        String updatedName = data.getStringExtra("name");
-                        if (id != -1) {
-
-                            for (Contact contact : contacts) {
-                                if (contact.getId() == id) {
-                                    contact.setName(updatedName);
-                                    break;
-                                }
-                            }
-                            adapter.notifyItemChanged(id-1);
-                        }
-
-                    }
-                }
-        );
-        insertContactLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                        if(result.getResultCode() == RESULT_OK){
-                            Intent data = result.getData();
-                            Contact contact = (Contact) (data != null ? data.getSerializableExtra("contact") : null);
-                            contacts.add(contacts.size(), contact);
-                            adapter.notifyItemInserted(contacts.size());
-                        }
-                }
-        );
+        contactInfoLauncher = updateOrDeleteContact(contactInfoLauncher);
+        insertContactLauncher = addNewContact(insertContactLauncher);
         insertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,5 +89,54 @@ public class ContactsListActivity extends AppCompatActivity {
                 insertContactLauncher.launch(intent);
             }
         });
+    }
+    private ActivityResultLauncher<Intent> updateOrDeleteContact(ActivityResultLauncher<Intent> launcher){
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Intent data = result.getData();
+                    int id = data.getIntExtra("id", -1);
+                    int index = getIndex(contacts, id);
+
+                    switch (result.getResultCode()){
+                        case RESULT_OK:
+                            adapter.notifyItemChanged(index);
+                            break;
+                        case RESULT_DELETE:
+                            contacts.remove(index);
+                            adapter.notifyItemRemoved(index);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+        );
+        return launcher;
+    }
+    private ActivityResultLauncher<Intent> addNewContact(ActivityResultLauncher<Intent> launcher){
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == RESULT_OK){
+                        Intent data = result.getData();
+                        Contact contact = (Contact) (data != null ? data.getSerializableExtra("contact") : null);
+                        contacts.add(contacts.size(), contact);
+                        comparator = new ContactComparator();
+                        contacts.sort(comparator);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+        );
+        return launcher;
+    }
+    private int getIndex(List<Contact> list, int id){
+        int index = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getId() == id){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

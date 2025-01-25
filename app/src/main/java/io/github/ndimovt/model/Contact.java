@@ -138,7 +138,7 @@ public class Contact implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Contact)) return false;
         Contact contact = (Contact) o;
-        return Objects.equals(name, contact.name) && Objects.equals(phoneType, contact.phoneType) && Objects.equals(phone, contact.phone) && Objects.equals(emailType, contact.emailType) && Objects.equals(email, contact.email);
+        return id == contact.id;
     }
 
     /**

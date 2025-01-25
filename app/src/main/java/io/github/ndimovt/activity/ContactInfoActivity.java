@@ -27,6 +27,7 @@ import java.util.List;
  */
 
 public class ContactInfoActivity extends AppCompatActivity {
+    private static final int RESULT_DELETE = 5;
     private ActivityResultLauncher<Intent> launcher;
     private TextView contactNameView;
     private TextView contactPhoneTypeView;
@@ -38,6 +39,7 @@ public class ContactInfoActivity extends AppCompatActivity {
     private Button message;
     private Button mail;
     private Button exit;
+    private Button delete;
     private ImageView image;
     private IListener listener;
     private List<Contact> list = DataList.getInstance().getContacts();
@@ -77,7 +79,6 @@ public class ContactInfoActivity extends AppCompatActivity {
         message.setOnClickListener(listener = new MessageButton(contact.getPhone(), this));
 
         call.setOnClickListener(listener = new CallButton(contact.getPhone(), this));
-
         openEditActivity.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -96,18 +97,21 @@ public class ContactInfoActivity extends AppCompatActivity {
         launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    Log.d("ueu", "testing "+result.getResultCode());
-                    Log.d("ueu", "testing "+RESULT_OK);
-
                     if (result.getResultCode() == RESULT_OK) {
-                        Log.d("ueu", "testing21312 ");
                         Intent data = result.getData();
-                        int ids = data.getIntExtra("id", -1);
-                        Log.d("id", "id "+ids);
                         setResult(RESULT_OK, data);
                     }
                 }
         );
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent delete = new Intent(ContactInfoActivity.this, ContactsListActivity.class);
+                delete.putExtra("id", id);
+                setResult(RESULT_DELETE, delete);
+                finish();
+            }
+        });
     }
     private void initializeDesign(){
         contactNameView = findViewById(R.id.contact_name);
@@ -116,7 +120,8 @@ public class ContactInfoActivity extends AppCompatActivity {
         contactEmailTypeView = findViewById(R.id.contact_email_type);
         contactEmailView = findViewById(R.id.contact_email);
         openEditActivity = findViewById(R.id.edit);
-        exit = findViewById(R.id.button);
+        exit = findViewById(R.id.back_btn);
+        delete = findViewById(R.id.delete_btn);
         image = findViewById(R.id.imageView2);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
