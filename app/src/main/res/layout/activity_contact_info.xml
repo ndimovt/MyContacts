@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <ImageView
@@ -20,7 +20,7 @@
             android:id="@+id/contact_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact Name"
+            android:text="@string/contact_name"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -33,7 +33,7 @@
             android:id="@+id/call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Call"
+            android:text="@string/call_btn"
             app:layout_constraintTop_toBottomOf="@id/contact_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message"
+            android:text="@string/sms_btn"
             app:layout_constraintTop_toBottomOf="@id/call"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,11 +53,12 @@
             android:id="@+id/mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mail"
             app:layout_constraintTop_toBottomOf="@id/message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:text="@string/email_btn"
+    />
 
     <TextView
             android:id="@+id/contact_phone_type"
@@ -105,33 +106,39 @@
             android:id="@+id/edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"
             app:layout_constraintTop_toBottomOf="@id/contact_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.126" app:layout_constraintVertical_bias="0.627"/>
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.126"
+            app:layout_constraintVertical_bias="0.627"
+            android:text="@string/edit_btn"
+    />
     <Button
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
             app:layout_constraintTop_toBottomOf="@+id/contact_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.907"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.649"/>
+            app:layout_constraintVertical_bias="0.649"
+            android:text="@string/back_btn"
+    />
     <Button
             android:id="@+id/delete_btn"
-            android:text="Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/contact_email"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.649" android:layout_marginStart="40dp"
-            app:layout_constraintEnd_toStartOf="@+id/back_btn"/>
+            app:layout_constraintVertical_bias="0.649"
+            android:layout_marginStart="40dp"
+            app:layout_constraintEnd_toStartOf="@+id/back_btn"
+            android:text="@string/del_btn"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

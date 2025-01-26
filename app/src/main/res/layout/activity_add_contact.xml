@@ -35,7 +35,7 @@
                 app:layout_constraintVertical_bias="0.791"
                 android:windowSoftInputMode="stateVisible|adjustResize"
                 android:ems="10"
-                android:hint="Add email"
+                android:hint="@string/hint_add_email"
         />
         <EditText
                 android:id="@+id/addName"
@@ -49,7 +49,7 @@
                 app:layout_constraintHorizontal_bias="0.931"
                 app:layout_constraintVertical_bias="0.609"
                 android:ems="10"
-                android:hint="Add name"
+                android:hint="@string/hint_add_name"
                 android:layout_marginTop="340dp"/>
         <Spinner
                 android:id="@+id/phoneType"
@@ -73,7 +73,7 @@
                 app:layout_constraintHorizontal_bias="0.926"
                 app:layout_constraintVertical_bias="0.934"
                 android:ems="10"
-                android:hint="Add phone number"
+                android:hint="@string/hint_phone_num"
         />
         <Button
                 android:id="@+id/save_btn"
@@ -85,7 +85,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/addEmailAddress"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintVertical_bias="0.473"
-                android:text="Save"/>
+                android:text="@string/save"/>
         <ImageView
                 android:id="@+id/avatar"
                 android:layout_width="253dp"

@@ -3,23 +3,33 @@
     <string name="add_contact">Add Contact</string>
     <string name="title_activity_add_contact">AddContact</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="save">Save</string>
     <string name="call"/>
     <string name="top_text">Top Text</string>
     <string name="bottom_text"/>
-    <string name="title_activity_anton">ActivityAnton</string>
-    <string name="title_activity_boris">ActivityBoris</string>
-    <string name="title_activity_carla">ActivityCarla</string>
-    <string name="title_activity_david">ActivityDavid</string>
-    <string name="title_activity_elena">ActivityElena</string>
-    <string name="title_activity_elena_p">ActivityElenaP</string>
+    <string name="hint_phone_num">Add phone number</string>
+    <string name="hint_add_name">Add name</string>
+    <string name="hint_add_email">Add email</string>
+    <string name="contact_name">Contact Name</string>
+    <string name="call_btn">Call</string>
+    <string name="sms_btn">Message</string>
+    <string name="email_btn">Email</string>
+    <string name="edit_btn">Edit</string>
+    <string name="back_btn">Back</string>
+    <string name="del_btn">Delete</string>
+    <string name="insert_btn">Add Contact</string>
+    <string name="send_btn">Send</string>
+    <string name="topic_field">Topic: </string>
+    <string name="text_field">Text: </string>
+    <string name="send_field">Send to: </string>
+    <string name="mobile_num_field">Mobile No: </string>
+    <string name="message_field">Message: </string>
+
+
     <string name="title_activity_edit_contact">EditContactActivity</string>
     <string name="title_activity_send_email">SendEmailActivity</string>
     <string name="title_activity_send_sms">SendSmsActivity</string>
