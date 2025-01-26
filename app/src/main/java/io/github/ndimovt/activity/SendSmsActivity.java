@@ -16,9 +16,9 @@ import androidx.core.content.ContextCompat;
 import io.github.ndimovt.R;
 
 public class SendSmsActivity extends AppCompatActivity {
-    TextView mobileno;
-    EditText message;
-    Button sendsms;
+    private TextView mobileno;
+    private EditText message;
+    private Button sendsms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +40,19 @@ public class SendSmsActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(SendSmsActivity.this,new String[] { Manifest.permission.SEND_SMS},1);
                 }
                 else {
-                    String msg = message.getText().toString();
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(String.valueOf(getPhone),null,msg,null,null);
-                    Toast.makeText(getApplicationContext(),"Message Sent",Toast.LENGTH_LONG).show();
-                    finish();
+                    try {
+                        String msg = message.getText().toString();
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(String.valueOf(getPhone), null, msg, null, null);
+                        Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_LONG).show();
+                        finish();
+                    }catch (IllegalArgumentException ie){
+                        Toast.makeText(getApplicationContext(), "Message not send! Missing text!", Toast.LENGTH_LONG).show();
+                        ie.printStackTrace();
+                    }
                 }
 
             }
         });
     }
-
 }

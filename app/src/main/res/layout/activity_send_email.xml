@@ -2,43 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- TextView for "Send to" label -->
     <TextView
             android:id="@+id/sendTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send to:"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp" />
-
-    <!-- EditText for "Send to" input -->
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="Send to:"
+    />
     <TextView
             android:id="@+id/editTextSendTo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/sendTo"
             app:layout_constraintStart_toEndOf="@id/sendTo"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"/>
 
-    <!-- TextView for "Topic" label -->
-
-    <!-- EditText for "Topic" input -->
     <TextView
             android:id="@+id/topic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Topic:"
             app:layout_constraintTop_toBottomOf="@id/sendTo"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp"
+            android:textStyle="bold"
+            android:text="Topic:"
+    />
+
     <EditText
             android:id="@+id/editTextTopic"
             android:layout_width="0dp"
@@ -49,18 +48,18 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp" />
 
-    <!-- TextView for "Text" label -->
     <TextView
             android:id="@+id/textView"
             android:layout_width="35dp"
             android:layout_height="40dp"
-            android:text="Text:"
             app:layout_constraintTop_toBottomOf="@id/topic"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"/>
+            android:layout_marginTop="36dp"
+            android:text="Text:"
+            android:textStyle="bold"
+    />
 
-    <!-- EditText for "Text" input -->
     <EditText
             android:id="@+id/editTextText"
             android:layout_width="320dp"
@@ -72,17 +71,18 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"/>
 
-    <!-- Button to send -->
     <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
             app:layout_constraintTop_toBottomOf="@id/editTextText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.884"/>
+            android:layout_marginTop="24dp"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintVertical_bias="0.884"
+            android:text="Send"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

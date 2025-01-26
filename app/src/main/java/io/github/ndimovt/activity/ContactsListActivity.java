@@ -2,8 +2,6 @@ package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,16 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.github.ndimovt.R;
 import io.github.ndimovt.adapter.ContactAdapter;
-import io.github.ndimovt.adapter.DataViewHolder;
 import io.github.ndimovt.buttons.CallButton;
 import io.github.ndimovt.comparator.ContactComparator;
 import io.github.ndimovt.data.DataList;
 import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.myListener.IListener;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,6 +34,7 @@ public class ContactsListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ContactAdapter adapter;
     private Button insertBtn;
+    private IListener listener;
 
     /**
      * Sets adapter, view and List with contacts info.
@@ -60,16 +55,13 @@ public class ContactsListActivity extends AppCompatActivity {
         adapter.setListener(new ContactAdapter.IClick() {
             @Override
             public void buttonClick(int position) {
-                try {
-                    String value = contacts.get(position).getPhone();
-                    if (value != null) {
-                        Toast.makeText(getApplicationContext(), "Calling " + value, Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Missing phone number", Toast.LENGTH_LONG).show();
-                    }
-                } catch (NullPointerException npe) {
-                    npe.printStackTrace();
+                if(contacts.get(position).getPhone() != null){
+                    listener = new CallButton(contacts.get(position).getPhone(), getApplicationContext());
+                    listener.onClick(recyclerView);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Phone number is missing or invalid!", Toast.LENGTH_LONG).show();
                 }
+
             }
 
             @Override
@@ -126,7 +118,8 @@ public class ContactsListActivity extends AppCompatActivity {
                         contacts.add(contacts.size(), contact);
                         comparator = new ContactComparator();
                         contacts.sort(comparator);
-                        adapter.notifyDataSetChanged();
+                        int index = getIndex(contacts, contact.getId());
+                        adapter.notifyItemInserted(index);
                     }
                 }
         );

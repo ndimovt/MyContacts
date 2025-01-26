@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.R;
 
 public class SendEmailActivity extends AppCompatActivity {
-    Button send;
-    TextView sendTo;
-    TextView subject;
-    TextView receiver;
-    TextView body;
-    EditText mailSubject;
-    EditText mail;
+    private Button send;
+    private TextView sendTo;
+    private TextView subject;
+    private TextView receiver;
+    private TextView body;
+    private EditText mailSubject;
+    private EditText mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class SendEmailActivity extends AppCompatActivity {
         initializeDesign();
 
         Intent emailData = getIntent();
-        String mail = emailData.getStringExtra("reciever");
+        String mail = emailData.getStringExtra("receiver");
         sendTo.setText(mail);
 
         send.setOnClickListener(view -> {

@@ -50,7 +50,6 @@
                 app:layout_constraintVertical_bias="0.609"
                 android:ems="10"
                 android:hint="Add name"
-
                 android:layout_marginTop="340dp"/>
         <Spinner
                 android:id="@+id/phoneType"

@@ -82,46 +82,48 @@ public class EditContactActivity extends AppCompatActivity{
         saveRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isNameValid = true;
-                boolean isPhoneNumValid = true;
-                boolean isEmailValid = true;
-
-                String name = nameView.getText().toString();
-                if(!Validator.nameValidator(name)){
-                    Toast.makeText(getApplicationContext(), "Invalid or missing name!", Toast.LENGTH_LONG).show();
-                    isNameValid = false;
-                }
-                String phoneType = phoneTypeView.getSelectedItem().toString();
-                String phone = phoneView.getText().toString();
-                if(!Validator.phoneNumberValidator(phone)){
-                    Toast.makeText(getApplicationContext(), "Invalid or missing phone number!", Toast.LENGTH_LONG).show();
-                    isPhoneNumValid = false;
-                }
-                String mailType = emailTypeView.getSelectedItem().toString();
-                String email = emailView.getText().toString();
-
-                if(!Validator.emailValidator(email)){
-                    Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_LONG).show();
-                    isEmailValid = false;
-                }
-                if(isNameValid && isPhoneNumValid && isEmailValid){
-                    finalContact.setId(contact.getId());
-                    finalContact.setName(name);
-                    finalContact.setPhoneType(phoneType);
-                    finalContact.setPhone(phone);
-                    finalContact.setEmailType(mailType);
-                    finalContact.setEmail(email);
-
-                    Intent resultIntent = new Intent(EditContactActivity.this, ContactsListActivity.class);
-                    resultIntent.putExtra("id", finalContact.getId());
-                    resultIntent.putExtra("name", finalContact.getName());
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
-                }
+                saveContact(finalContact);
             }
         });
     }
+    private void saveContact(Contact finalContact){
+        boolean isNameValid = true;
+        boolean isPhoneNumValid = true;
+        boolean isEmailValid = true;
 
+        String name = nameView.getText().toString();
+        if(!Validator.nameValidator(name)){
+            Toast.makeText(getApplicationContext(), "Invalid or missing name!", Toast.LENGTH_LONG).show();
+            isNameValid = false;
+        }
+        String phoneType = phoneTypeView.getSelectedItem().toString();
+        String phone = phoneView.getText().toString();
+        if(!Validator.phoneNumberValidator(phone)){
+            Toast.makeText(getApplicationContext(), "Invalid or missing phone number!", Toast.LENGTH_LONG).show();
+            isPhoneNumValid = false;
+        }
+        String mailType = emailTypeView.getSelectedItem().toString();
+        String email = emailView.getText().toString();
+
+        if(!Validator.emailValidator(email)){
+            Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_LONG).show();
+            isEmailValid = false;
+        }
+        if(isNameValid && isPhoneNumValid && isEmailValid){
+            finalContact.setId(contact.getId());
+            finalContact.setName(name);
+            finalContact.setPhoneType(phoneType);
+            finalContact.setPhone(phone);
+            finalContact.setEmailType(mailType);
+            finalContact.setEmail(email);
+
+            Intent resultIntent = new Intent(EditContactActivity.this, ContactsListActivity.class);
+            resultIntent.putExtra("id", finalContact.getId());
+            resultIntent.putExtra("name", finalContact.getName());
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        }
+    }
     private int findPosition(String[] arr, String infoType) {
         for (int i = 0; i < arr.length; i++) {
             if(arr[i].equals(infoType)){

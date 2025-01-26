@@ -2,7 +2,6 @@ package io.github.ndimovt.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,10 +11,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import io.github.ndimovt.R;
-import io.github.ndimovt.adapter.ContactAdapter;
 import io.github.ndimovt.buttons.CallButton;
-import io.github.ndimovt.buttons.MessageButton;
-import io.github.ndimovt.buttons.SendMailButton;
 import io.github.ndimovt.data.DataList;
 import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.myListener.IListener;
@@ -32,9 +28,9 @@ public class ContactInfoActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> launcher;
     private TextView contactNameView;
     private TextView contactPhoneTypeView;
-    private  TextView contactPhoneView;
+    private TextView contactPhoneView;
     private TextView contactEmailTypeView;
-    private  TextView contactEmailView;
+    private TextView contactEmailView;
     private Button openEditActivity;
     private Button call;
     private Button message;
@@ -75,22 +71,31 @@ public class ContactInfoActivity extends AppCompatActivity {
         contactEmailView.setText(contact.getEmail());
 
         Contact finalContact = contact;
-        Log.d("email", "email "+contact.getEmail());
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mailIntent = new Intent(ContactInfoActivity.this, SendEmailActivity.class);
-                mailIntent.putExtra("reciever", finalContact.getEmail());
-                startActivity(mailIntent);
+                if(contactEmailView != null){
+                    Intent mailIntent = new Intent(ContactInfoActivity.this, SendEmailActivity.class);
+                    mailIntent.putExtra("receiver", finalContact.getEmail());
+                    startActivity(mailIntent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Missing email!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent phone = new Intent(ContactInfoActivity.this, SendSmsActivity.class);
-                phone.putExtra("phone", finalContact.getPhone());
-                startActivity(phone);
+                if(contactPhoneView != null){
+                    Intent phone = new Intent(ContactInfoActivity.this, SendSmsActivity.class);
+                    phone.putExtra("phone", finalContact.getPhone());
+                    startActivity(phone);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Missing phone number!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

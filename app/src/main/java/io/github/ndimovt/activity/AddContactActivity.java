@@ -36,42 +36,45 @@ public class AddContactActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isNameValid = true;
-                boolean isPhoneNumValid = true;
-                boolean isEmailValid = true;
-                Intent intent = getIntent();
-                int id = intent.getIntExtra("id", -1);
-
-                String contactName = name.getText().toString();
-                if(!Validator.nameValidator(contactName)){
-                    Toast.makeText(getApplicationContext(), "Invalid or missing name!", Toast.LENGTH_LONG).show();
-                    isNameValid = false;
-                }
-                String contactPhoneType = phoneType.getSelectedItem().toString();
-                String contactPhone = phone.getText().toString();
-
-                if(!Validator.phoneNumberValidator(contactPhone)){
-                    Toast.makeText(getApplicationContext(), "Invalid or missing phone number!", Toast.LENGTH_LONG).show();
-                    isPhoneNumValid = false;
-                }
-                String contactMailType = emailType.getSelectedItem().toString();
-                String contactEmail = email.getText().toString();
-
-                if(!Validator.emailValidator(contactEmail)){
-                        Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_LONG).show();
-                        isEmailValid = false;
-                }
-
-                if(isNameValid && isPhoneNumValid && isEmailValid){
-                    Contact contact = new Contact(id, contactName, contactPhoneType, contactPhone, contactMailType, contactEmail);
-                    Intent result = new Intent(AddContactActivity.this, ContactsListActivity.class);
-                    result.putExtra("contact", contact);
-                    setResult(RESULT_OK, result);
-                    finish();
-                }
+                insert();
             }
         });
 
+    }
+    private void insert(){
+        boolean isNameValid = true;
+        boolean isPhoneNumValid = true;
+        boolean isEmailValid = true;
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+
+        String contactName = name.getText().toString();
+        if(!Validator.nameValidator(contactName)){
+            Toast.makeText(getApplicationContext(), "Invalid or missing name!", Toast.LENGTH_LONG).show();
+            isNameValid = false;
+        }
+        String contactPhoneType = phoneType.getSelectedItem().toString();
+        String contactPhone = phone.getText().toString();
+
+        if(!Validator.phoneNumberValidator(contactPhone)){
+            Toast.makeText(getApplicationContext(), "Invalid or missing phone number!", Toast.LENGTH_LONG).show();
+            isPhoneNumValid = false;
+        }
+        String contactMailType = emailType.getSelectedItem().toString();
+        String contactEmail = email.getText().toString();
+
+        if(!Validator.emailValidator(contactEmail)){
+            Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_LONG).show();
+            isEmailValid = false;
+        }
+
+        if(isNameValid && isPhoneNumValid && isEmailValid){
+            Contact contact = new Contact(id, contactName, contactPhoneType, contactPhone, contactMailType, contactEmail);
+            Intent result = new Intent(AddContactActivity.this, ContactsListActivity.class);
+            result.putExtra("contact", contact);
+            setResult(RESULT_OK, result);
+            finish();
+        }
     }
     private ArrayAdapter<String> spinnerValue(String[] arr){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arr);
