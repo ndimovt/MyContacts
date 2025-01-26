@@ -74,7 +74,7 @@ public class ContactInfoActivity extends AppCompatActivity {
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(contactEmailView != null){
+                if(finalContact.getEmail() != null){
                     Intent mailIntent = new Intent(ContactInfoActivity.this, SendEmailActivity.class);
                     mailIntent.putExtra("receiver", finalContact.getEmail());
                     startActivity(mailIntent);
@@ -88,7 +88,7 @@ public class ContactInfoActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(contactPhoneView != null){
+                if(finalContact.getPhone() != null){
                     Intent phone = new Intent(ContactInfoActivity.this, SendSmsActivity.class);
                     phone.putExtra("phone", finalContact.getPhone());
                     startActivity(phone);

@@ -15,24 +15,30 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import io.github.ndimovt.R;
 
+/**
+ * The class SendSmsActivity
+ */
 public class SendSmsActivity extends AppCompatActivity {
-    private TextView mobileno;
+    private TextView mobileNo;
     private EditText message;
-    private Button sendsms;
+    private Button sendSms;
+    private Button back;
 
+    /**
+     * Creates visual representation of a given layout, along with functionalities required
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_sms);
 
-        mobileno = findViewById(R.id.editText1);
-        message = findViewById(R.id.editText2);
-        sendsms = findViewById(R.id.button1);
+        initializeDesign();
 
         Intent phone = getIntent();
         String getPhone = phone.getStringExtra("phone");
-        mobileno.setText(getPhone);
-        sendsms.setOnClickListener(new View.OnClickListener() {
+        mobileNo.setText(getPhone);
+        sendSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ContextCompat.checkSelfPermission(SendSmsActivity.this, Manifest.permission.SEND_SMS)
@@ -54,5 +60,14 @@ public class SendSmsActivity extends AppCompatActivity {
 
             }
         });
+        back.setOnClickListener(view -> {
+            finish();
+        });
+    }
+    private void initializeDesign(){
+        mobileNo = findViewById(R.id.editText1);
+        message = findViewById(R.id.editText2);
+        sendSms = findViewById(R.id.button1);
+        back = findViewById(R.id.back_sms);
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
  * Sets RecyclerView adapter and shows data on-screen.
  */
 public class ContactAdapter extends RecyclerView.Adapter<DataViewHolder>{
-    private static List<Contact> list;
+    private List<Contact> list;
     private IClick listener;
 
     /**

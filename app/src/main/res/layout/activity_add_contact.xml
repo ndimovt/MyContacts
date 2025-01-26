@@ -41,7 +41,7 @@
                 android:id="@+id/addName"
                 android:layout_width="208dp"
                 android:layout_height="46dp"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintBottom_toTopOf="@+id/addPhoneNumber"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

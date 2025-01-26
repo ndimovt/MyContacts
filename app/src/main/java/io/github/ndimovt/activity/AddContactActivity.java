@@ -63,9 +63,12 @@ public class AddContactActivity extends AppCompatActivity {
         String contactMailType = emailType.getSelectedItem().toString();
         String contactEmail = email.getText().toString();
 
-        if(!Validator.emailValidator(contactEmail)){
+        if(!Validator.emailValidator(contactEmail) && !contactEmail.isEmpty()){
             Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_LONG).show();
             isEmailValid = false;
+        }
+        if(contactEmail.isEmpty()){
+            contactEmail = null;
         }
 
         if(isNameValid && isPhoneNumValid && isEmailValid){
