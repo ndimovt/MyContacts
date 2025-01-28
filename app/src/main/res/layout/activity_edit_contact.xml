@@ -13,6 +13,7 @@
                 android:layout_height="match_parent">
                 <Spinner
                         android:id="@+id/emailTypeSpinner"
+                        android:entries="@array/email_type_spinner"
                         android:layout_width="146dp"
                         android:layout_height="42dp"
                         app:layout_constraintEnd_toStartOf="@+id/editEmailAddress"
@@ -53,6 +54,7 @@
                 />
                 <Spinner
                         android:id="@+id/phoneTypeSpinner"
+                        android:entries="@array/phone_type_spinner"
                         android:layout_width="145dp"
                         android:layout_height="43dp"
                         app:layout_constraintStart_toStartOf="parent"

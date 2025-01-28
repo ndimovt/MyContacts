@@ -61,9 +61,9 @@ public class EditContactActivity extends AppCompatActivity{
             phoneView.setText(contact.getPhone());
             emailView.setText(contact.getEmail());
 
-            phoneTypeView.setAdapter(spinnerValue(pTypes));
+            //phoneTypeView.setAdapter(spinnerValue(pTypes));
 
-            emailTypeView.setAdapter(spinnerValue(eTypes));
+            //emailTypeView.setAdapter(spinnerValue(eTypes));
 
             String typePhone = contact.getPhoneType();
             if (typePhone != null) {

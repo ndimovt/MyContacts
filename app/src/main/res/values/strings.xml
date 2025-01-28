@@ -2,7 +2,8 @@
     <string name="app_name">MyContacts</string>
     <string name="add_contact">Add Contact</string>
     <string name="title_activity_add_contact">AddContact</string>
-    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -28,6 +29,20 @@
     <string name="send_field">Send to: </string>
     <string name="mobile_num_field">Mobile No: </string>
     <string name="message_field">Message: </string>
+    <string-array name="email_type_spinner">
+        <item>Main</item>
+        <item>Office</item>
+        <item>Personal</item>
+        <item>Billing</item>
+        <item>School</item>
+        <item>University</item>
+    </string-array>
+    <string-array name="phone_type_spinner">
+        <item>Mobile</item>
+        <item>Fax</item>
+        <item>Home</item>
+        <item>Work</item>
+    </string-array>
 
 
     <string name="title_activity_edit_contact">EditContactActivity</string>
