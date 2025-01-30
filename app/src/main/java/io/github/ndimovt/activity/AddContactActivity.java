@@ -6,8 +6,6 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import io.github.ndimovt.R;
-import io.github.ndimovt.adapter.SpinnerEmailTypeAdapter;
-import io.github.ndimovt.adapter.SpinnerPhoneTypeAdapter;
 import io.github.ndimovt.model.Contact;
 import io.github.ndimovt.validators.Validator;
 
@@ -19,29 +17,14 @@ public class AddContactActivity extends AppCompatActivity {
     private EditText email;
     private Button save;
     private ImageView imageView;
-    private final SpinnerPhoneTypeAdapter phoneTypeAdapter = new SpinnerPhoneTypeAdapter();
-    private final SpinnerEmailTypeAdapter emailTypeAdapter = new SpinnerEmailTypeAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
-        String[] pTypes = phoneTypeAdapter.getPhoneTypes();
-        String[] eTypes = emailTypeAdapter.getEmailTypes();
-
         initializeDesign();
-        phoneType.setAdapter(spinnerValue(pTypes));
-        emailType.setAdapter(spinnerValue(eTypes));
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insert();
-            }
-        });
-
     }
-    private void insert(){
+    public void insert(View view){
         boolean isNameValid = true;
         boolean isPhoneNumValid = true;
         boolean isEmailValid = true;
@@ -79,11 +62,6 @@ public class AddContactActivity extends AppCompatActivity {
             finish();
         }
     }
-    private ArrayAdapter<String> spinnerValue(String[] arr){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arr);
-        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        return adapter;
-    }
     private void initializeDesign(){
         name = findViewById(R.id.addName);
         phoneType = findViewById(R.id.phoneType);
@@ -93,4 +71,5 @@ public class AddContactActivity extends AppCompatActivity {
         imageView = findViewById(R.id.avatar);
         save = findViewById(R.id.save_btn);
     }
+
 }

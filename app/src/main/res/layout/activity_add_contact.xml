@@ -12,6 +12,7 @@
             android:layout_height="match_parent">
         <Spinner
                 android:id="@+id/emailTypeSpinner"
+                android:entries="@array/email_type_spinner"
                 android:layout_width="146dp"
                 android:layout_height="42dp"
                 app:layout_constraintEnd_toStartOf="@+id/addEmailAddress"
@@ -53,6 +54,7 @@
                 android:layout_marginTop="340dp"/>
         <Spinner
                 android:id="@+id/phoneType"
+                android:entries="@array/phone_type_spinner"
                 android:layout_width="145dp"
                 android:layout_height="43dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +87,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/addEmailAddress"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintVertical_bias="0.473"
-                android:text="@string/save"/>
+                android:text="@string/save"
+                android:onClick="insert"/>
         <ImageView
                 android:id="@+id/avatar"
                 android:layout_width="253dp"

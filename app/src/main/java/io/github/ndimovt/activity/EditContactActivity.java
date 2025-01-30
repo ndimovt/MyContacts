@@ -61,10 +61,6 @@ public class EditContactActivity extends AppCompatActivity{
             phoneView.setText(contact.getPhone());
             emailView.setText(contact.getEmail());
 
-            //phoneTypeView.setAdapter(spinnerValue(pTypes));
-
-            //emailTypeView.setAdapter(spinnerValue(eTypes));
-
             String typePhone = contact.getPhoneType();
             if (typePhone != null) {
                 int position = findPosition(pTypes, typePhone);
@@ -78,15 +74,10 @@ public class EditContactActivity extends AppCompatActivity{
             }
         }
 
-        Contact finalContact = contact;
-        saveRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveContact(finalContact);
-            }
-        });
+
     }
-    private void saveContact(Contact finalContact){
+    public void saveContact(View view){
+        Contact finalContact = contact;
         boolean isNameValid = true;
         boolean isPhoneNumValid = true;
         boolean isEmailValid = true;
@@ -131,11 +122,6 @@ public class EditContactActivity extends AppCompatActivity{
             }
         }
         return -1;
-    }
-    private ArrayAdapter<String> spinnerValue(String[] arr){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arr);
-        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        return adapter;
     }
     private void initializeDesign(){
         nameView = findViewById(R.id.editName);
